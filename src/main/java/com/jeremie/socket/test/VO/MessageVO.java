@@ -1,4 +1,4 @@
-package VO;
+package com.jeremie.socket.test.VO;
 
 import java.io.Serializable;
 
