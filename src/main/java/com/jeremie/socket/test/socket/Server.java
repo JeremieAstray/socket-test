@@ -26,20 +26,25 @@ public class Server {
         try {
             serverSocket = new ServerSocket(8000);
             while (true) {
+                System.out.println("1");
                 Socket socket = serverSocket.accept();
-                ServerThread serverThread = new ServerThread(socket, str -> {
-                    try {
-                        for (Map.Entry<String, ServerThread> user : onlineUsers.entrySet()) {
-                            ObjectOutputStream oos = user.getValue().oos;
-                            if (oos != null) {
-                                oos.writeUTF(str);
-                                oos.flush();
+                System.out.println("2");
+                ServerThread serverThread = new ServerThread(socket, new Callback<String, Boolean>() {
+
+                    public Boolean call(String str) {
+                        try {
+                            for (Map.Entry<String, ServerThread> user : onlineUsers.entrySet()) {
+                                ObjectOutputStream oos = user.getValue().oos;
+                                if (oos != null) {
+                                    oos.writeUTF(str);
+                                    oos.flush();
+                                }
                             }
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        return true;
                     }
-                    return true;
                 });
                 Thread thread = new Thread(serverThread);
                 thread.start();
