@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  * <p>接收客户端的连接，新建线程处理该客户端</p>
  * @author Administrator
  */
-public class MyServer {
+public class MyServerTCP {
     
     public static void main(String[] args){
         ServerSocket socket = null;
@@ -35,7 +35,7 @@ public class MyServer {
                 new Thread(new ServerRunnable(mes)).start();
             }
         } catch (IOException ex) {
-            Logger.getLogger(MyServer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyServerTCP.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
@@ -63,7 +63,7 @@ public class MyServer {
                 oos.close();
                 userSocket.close();
             } catch (IOException ex) {
-                Logger.getLogger(MyServer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MyServerTCP.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }

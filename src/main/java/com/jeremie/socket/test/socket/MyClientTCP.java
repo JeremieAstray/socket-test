@@ -31,11 +31,9 @@ import java.util.logging.Logger;
  * 每次输出后要执行刷出</p>
  * <p>
  * 中文乱码，可能是个人的机子问题，连控制台输入都乱码</p>
- * 
- *
  * @author Administrator
  */
-public class MyClient {
+public class MyClientTCP {
 
     public static void main(String[] args) {
         try {
@@ -58,14 +56,15 @@ public class MyClient {
 //                            fileOutputStream.close();
 //                            System.out.println(msg);
                             System.out.println(msg);
-                            if (msg == null || "END".equals(msg)) {
+                            if (msg == null || "Server return:END".equals(msg)) {
                                 bfi.close();
                                 bfo.close();
                                 socket.close();
+                                System.exit(0);
                             }
                         }
                     } catch (IOException ex) {
-                        Logger.getLogger(MyClient.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(MyClientTCP.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -84,7 +83,7 @@ public class MyClient {
                 bfo.flush();
             }
         } catch (IOException ex) {
-            Logger.getLogger(MyClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyClientTCP.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
